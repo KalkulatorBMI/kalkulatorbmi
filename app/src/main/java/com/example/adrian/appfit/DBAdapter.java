@@ -9,7 +9,9 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.Html;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Created by Adrian on 03.04.2016.
@@ -35,17 +37,17 @@ public class DBAdapter {
 
     private static final String TAG = "DBAdapter";
 
-
+    //Informacje o bazie danych i tabeli
     private static final String DATABASE_NAME = "MyFood";
     private static final String DATABASE_TABLE = "tblFood";
     private static final int DATABASE_VERSION = 1;
 
+    //Tworzenie tabeli
     private static final String DATABASE_CREATE =
             "CREATE TABLE " + DATABASE_TABLE + " ( " + KEY_ROWID + " " + ID_OPTIONS + ", " + KEY_FOOD + " " + FOOD_OPTIONS + ", " + KEY_PROTEIN + " " +
                     PROTEIN_OPTIONS + ", " + KEY_CARB + " " + CARB_OPTIONS + ", " + KEY_FAT + " " + FAT_OPTIONS + ");";
 
     private final Context context;
-
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
 
@@ -62,9 +64,6 @@ public class DBAdapter {
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(DATABASE_CREATE);
-
-
-
         }
 
         @Override
@@ -89,14 +88,24 @@ public class DBAdapter {
         DBHelper.close();
     }
 
-    public long insertFood(String food, String protein, String carb, String fat) {
-        ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_FOOD, food);
-        initialValues.put(KEY_CARB, carb);
-        initialValues.put(KEY_FAT, fat);
-        initialValues.put(KEY_PROTEIN, protein);
+    //Wprowadź nowe produkty
+    public boolean insertFood(String food, String protein, String carb, String fat) {
 
-        return db.insert(DATABASE_TABLE, null, initialValues);
+        if(isEntry(food))
+            return false;
+        else {
+            ContentValues initialValues = new ContentValues();
+            initialValues.put(KEY_FOOD, food);
+            initialValues.put(KEY_CARB, carb);
+            initialValues.put(KEY_FAT, fat);
+            initialValues.put(KEY_PROTEIN, protein);
+
+            return db.insert(DATABASE_TABLE, null, initialValues) > 0;
+        }
+    }
+
+    public boolean deleteFood(String food) {
+            return db.delete(DATABASE_TABLE, KEY_FOOD +"=?", new String[] {food}) > 0;
     }
 
     public int getAllEntries() {
@@ -106,38 +115,33 @@ public class DBAdapter {
             return cursor.getInt(0);
         }
         return cursor.getInt(0);
-
     }
 
-    public String getRandomEntry() {
-
-        id = getAllEntries();
-        Random random = new Random();
-        int rand = random.nextInt(getAllEntries());
-        if (rand == 0)
-            ++rand;
-        Cursor cursor = db.rawQuery(
-                "SELECT food FROM tblFood WHERE _id = " + rand, null);
-        if (cursor.moveToFirst()) {
-            return cursor.getString(0);
-        }
-        return cursor.getString(0);
-    }
-
-    public String getEntry(String arg) {
+    //Znajdź produkt
+    public ProductClass getEntry(String arg) {
         String query = "SELECT * FROM " + DATABASE_TABLE + " WHERE food =?";
 
         Cursor c = db.rawQuery(query, new String[] {arg});
 
-        if (c.moveToFirst()) {
-           String output = c.getString(c.getColumnIndex(KEY_FOOD)) + ": \n"
-          +"WĘGLOWODANY: "         + c.getString(c.getColumnIndex(KEY_CARB)) + " \n"
-          +"BIAŁKO: "          + c.getString(c.getColumnIndex(KEY_PROTEIN)) + " \n"
-                   + "TŁUSZCZE: " + c.getString(c.getColumnIndex(KEY_FAT));
+        if(c.moveToFirst()){
+            ProductClass productClass = new ProductClass(c.getString(c.getColumnIndex(KEY_FOOD)),
+                    c.getString(c.getColumnIndex(KEY_CARB)),c.getString(c.getColumnIndex(KEY_PROTEIN)),
+                    c.getString(c.getColumnIndex(KEY_FAT)));
 
-            return output;
+                    return productClass;
         }
         else
-            return "NIC NIE ZNALEZIONO";
+            return null;
+    }
+
+    public boolean isEntry(String isFood) {
+        String query = "SELECT * FROM " + DATABASE_TABLE + " WHERE food =?";
+
+        Cursor c = db.rawQuery(query, new String[]{query});
+
+        if(c.moveToFirst())
+            return true;
+        else
+            return false;
     }
 }

@@ -7,25 +7,57 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#02b33e"
     tools:context="com.example.adrian.appfit.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TYMCZASOWE MENU"
-        android:textSize="22dp"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp" />
+
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Jedzenie"
-        android:id="@+id/button"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:id="@+id/statystykiButton"
+        android:background="@drawable/statystyki"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/dziennikButton" />
+
+    <Button
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:background="@drawable/jedzenie"
+        android:id="@+id/jedzenieButton"
         android:onClick="goToFood"
-        android:layout_marginTop="48dp"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:id="@+id/ustawieniaButton"
+        android:background="@drawable/ustawienia"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:id="@+id/aktywnoscButton"
+        android:background="@drawable/aktywnosc"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:background="@drawable/cel"
+        android:id="@+id/celButton"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:background="@drawable/dziennik"
+        android:id="@+id/dziennikButton"
+        android:layout_alignTop="@+id/celButton"
+        android:layout_alignStart="@+id/aktywnoscButton" />
 </RelativeLayout>
