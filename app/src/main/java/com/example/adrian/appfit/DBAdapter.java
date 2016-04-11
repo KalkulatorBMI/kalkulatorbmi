@@ -18,6 +18,8 @@ import android.widget.Toast;
  */
 public class DBAdapter {
     int id = 0;
+
+    //TABELA DLA PRODUKTOW
     public static final String KEY_ROWID = "_id";
     public static final String ID_OPTIONS = "INTEGER PRIMARY KEY AUTOINCREMENT";
     public static final int ID_COLUMN = 0;
@@ -34,18 +36,28 @@ public class DBAdapter {
     public static final String FAT_OPTIONS = "TEXT NOT NULL";
     public static final int FAT_COLUMN = 4;
 
+    //TABELA DLA POSILKOW
+    private static final String KEY_DATE = "date";
+    private static final String DATE_OPTIONS = "DATE";
+    private static final String KEY_AMOUNT = "amount";
+    private static final String AMOUNT_OPTIONS = "TEXT NOT NULL";
 
     private static final String TAG = "DBAdapter";
 
     //Informacje o bazie danych i tabeli
     private static final String DATABASE_NAME = "MyFood";
     private static final String DATABASE_TABLE = "tblFood";
+    private static final String DATABASE_TABLE_2 = "tblMeals";
     private static final int DATABASE_VERSION = 1;
 
     //Tworzenie tabeli
     private static final String DATABASE_CREATE =
             "CREATE TABLE " + DATABASE_TABLE + " ( " + KEY_ROWID + " " + ID_OPTIONS + ", " + KEY_FOOD + " " + FOOD_OPTIONS + ", " + KEY_PROTEIN + " " +
                     PROTEIN_OPTIONS + ", " + KEY_CARB + " " + CARB_OPTIONS + ", " + KEY_FAT + " " + FAT_OPTIONS + ");";
+
+    private static final String DATABASE_CREATE2 =
+            "CREATE TABLE " + DATABASE_TABLE_2 + " ( " + KEY_ROWID + " " + ID_OPTIONS + ", " + KEY_FOOD + " " + FOOD_OPTIONS +
+                    ", " + KEY_DATE + " " + DATE_OPTIONS + ", " + KEY_AMOUNT + " " + AMOUNT_OPTIONS + ");";
 
     private final Context context;
     private DatabaseHelper DBHelper;
@@ -64,6 +76,7 @@ public class DBAdapter {
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(DATABASE_CREATE);
+            db.execSQL(DATABASE_CREATE2);
         }
 
         @Override
@@ -73,6 +86,7 @@ public class DBAdapter {
                     + " to "
                     + newVersion + ", which will destroy all old data");
             db.execSQL("DROP TABLE IF EXISTS tblFood");
+            db.execSQL("DROP TABLE IF EXISTS tblMeals");
             onCreate(db);
         }
     }
@@ -128,10 +142,18 @@ public class DBAdapter {
                     c.getString(c.getColumnIndex(KEY_CARB)),c.getString(c.getColumnIndex(KEY_PROTEIN)),
                     c.getString(c.getColumnIndex(KEY_FAT)));
 
+            if(c != null && !c.isClosed()) {
+                c.close();
+            }
+
                     return productClass;
         }
-        else
+        else {
+            if(c != null && !c.isClosed()) {
+                c.close();
+            }
             return null;
+        }
     }
 
     public boolean isEntry(String isFood) {
@@ -144,4 +166,36 @@ public class DBAdapter {
         else
             return false;
     }
-}
+
+    //TABELA POSILEK
+    public boolean insertMeal(String food, String date, String amount) {
+            ContentValues initialValues = new ContentValues();
+            initialValues.put(KEY_FOOD, food);
+            initialValues.put(KEY_DATE, date);
+            initialValues.put(KEY_AMOUNT, amount);
+
+            return db.insert(DATABASE_TABLE_2, null, initialValues) > 0;
+    }
+    //FUNKCJA ZWRACAJACA WSZYSTKIE POSILKI Z DANEGO DNIA
+    public ArrayList<MealClass> getMeals(String date) {
+        String query = "SELECT * FROM " + DATABASE_TABLE_2 + " WHERE date =?";
+
+        ArrayList<MealClass> list = new ArrayList<MealClass>();
+        Cursor c = db.rawQuery(query, new String[] {date});
+
+        if(c.moveToFirst()) {
+            do {
+                MealClass mealClass = new MealClass(c.getString(c.getColumnIndex(KEY_FOOD)),
+                        c.getString(c.getColumnIndex(KEY_DATE)), c.getString(c.getColumnIndex(KEY_AMOUNT))
+                );
+                list.add(mealClass);
+            } while (c.moveToNext());
+        }
+            if(c != null && !c.isClosed()) {
+                c.close();
+            }
+            return list;
+        }
+
+    }
+

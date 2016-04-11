@@ -14,6 +14,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
 
     @Override

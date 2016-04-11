@@ -23,6 +23,7 @@ public class JedzenieSzukajActivity extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jedzenie_szukaj);
         // Capture our button from layout

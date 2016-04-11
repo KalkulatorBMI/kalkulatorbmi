@@ -17,4 +17,9 @@ public class JedzenieActivity extends AppCompatActivity {
         Intent intent = new Intent(this, JedzenieSzukajActivity.class);
         startActivity(intent);
     }
+
+    public void goToDodajPosilek(View view){
+        Intent intent = new Intent(this, DodajPosilekActivity.class);
+        startActivity(intent);
+    }
 }
