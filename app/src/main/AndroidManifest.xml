@@ -8,17 +8,38 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".KalkulatorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".JedzenieActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".JedzenieSzukajActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DodajPosilekActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".JedzenieActivity" />
-        <activity android:name=".JedzenieSzukajActivity" />
-        <activity android:name=".KalkulatorActivity" />
-        <activity android:name=".DodajPosilekActivity" />
+        <activity
+            android:name=".PlanDzialania"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Podsumowanie"
+            android:screenOrientation="portrait" />
+        <activity android:name=".test" />
+        <activity android:name=".DziennikActivity"></activity>
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#02b33e"
     tools:context="com.example.adrian.appfit.JedzenieSzukajActivity">
 
     <Button
@@ -14,27 +15,22 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="DODAJ"
-        android:textSize="12dp"
-        android:layout_above="@+id/deleteIt"
+        android:textStyle="bold"
+        android:background="@android:color/transparent"
+        android:textSize="17dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="USUŃ"
-        android:id="@+id/deleteIt"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:textSize="12dp"/>
-
-    <Button
         android:id="@+id/searchFor"
-        android:textSize="12dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:background="@android:color/transparent"
+        android:layout_width="400dp"
+        android:textStyle="bold"
+        android:layout_height="50dp"
         android:text="WYSZUKAJ"
-        android:layout_above="@id/addIt"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/addIt"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:id="@+id/editText4"
@@ -86,6 +82,39 @@
         android:layout_marginTop="20dp"
         android:layout_alignParentStart="true"
         android:textSize="17dp"/>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_above="@+id/searchFor"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/infoProduct" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text=""
+        android:background="@drawable/x_sign"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/deleteIt"
+        android:onClick="del"
+        android:visibility="invisible"
+        android:layout_alignBottom="@+id/listView"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text=""
+        android:onClick="addMeal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/plus_sign"
+        android:id="@+id/button14"
+        android:layout_above="@+id/searchFor"
+        android:layout_alignParentStart="true"
+        android:visibility="invisible" />
 
 
 </RelativeLayout>

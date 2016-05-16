@@ -50,6 +50,7 @@
         android:layout_height="135dp"
         android:background="@drawable/cel"
         android:id="@+id/celButton"
+        android:onClick="goToCalc"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
 
@@ -58,6 +59,7 @@
         android:layout_height="135dp"
         android:background="@drawable/dziennik"
         android:id="@+id/dziennikButton"
+        android:onClick="goToDziennik"
         android:layout_alignTop="@+id/celButton"
         android:layout_alignStart="@+id/aktywnoscButton" />
 </RelativeLayout>

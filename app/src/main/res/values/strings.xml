@@ -2,4 +2,8 @@
     <string name="app_name">AppFit</string>
     <string name="press">DODAJ PRODUKT</string>
     <string name="genRan">WYSZUKAJ PRODUKT</string>
+    <string name="bmidefault">BMI stanowi jeden z najpopularniejszych i najczęściej stosowanych wskaźników masy ciała. Dzięki niemu możemy szybko sprawdzić, czy nasza waga jest w normie. Aby poznać swoje BMI wystarczy, że wpiszesz powyższe dane - resztą zajmie się nasz program.</string>
+    <string name="bmiover">Jeśli nie jesteś umięśniony, bądź umięśniona taki współczynnik oznacza jedno - nadwagę! Nie martw się jednak, kliknij pod spodem by opracować dalszy plan działania. Z nami w mig pozbędziesz się zbędnych kilogramów.</string>
+    <string name="bmiunder">Tak niskie BMI oznacza, że masz niedowagę. Niedowaga może być równie groźna co nadwaga. Powinieneś/aś trochę przytyć, kliknij pod spodem by opracować dalszy plan działania.</string>
+    <string name="bmiok">Wygląda na to, że twoje BMI jest w normie. Nie oznacza to jednak, że nie może być lepiej prawda? Aby opracować dalszy plan działania kliknij pod spodem.</string>
 </resources>

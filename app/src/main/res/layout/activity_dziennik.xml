@@ -1,13 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#02b33e"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.adrian.appfit.DziennikActivity">
 
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="130dp"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:hint="Tutaj wpisz treść notatki."
+        android:layout_marginBottom="50dp"
+        android:background="#FFFFFFFF"
+        android:id="@+id/editText5"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:alpha="0.5"
+        android:layout_alignEnd="@+id/button16" />
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:hint="Tytuł"
+        android:id="@+id/editText6"
+        android:layout_above="@+id/editText5"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Dodaj notatkę"
+        android:onClick="addNote"
+        android:textStyle="bold"
+        android:textSize="19dp"
+        android:background="@android:color/transparent"
+        android:textAllCaps="false"
+        android:id="@+id/button16"
+        android:layout_alignParentBottom="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView3"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/editText6"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
