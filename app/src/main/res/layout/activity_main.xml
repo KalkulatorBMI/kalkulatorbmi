@@ -17,6 +17,7 @@
         android:layout_height="135dp"
         android:id="@+id/statystykiButton"
         android:background="@drawable/statystyki"
+        android:onClick="goToStat"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/dziennikButton" />
 

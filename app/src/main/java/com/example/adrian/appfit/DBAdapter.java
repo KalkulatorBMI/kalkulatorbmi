@@ -42,19 +42,11 @@ public class DBAdapter {
     public static final String TITLE_OPTIONS = "TEXT NOT NULL";
     public static final String KEY_TEXT = "fat";
     public static final String TEXT_OPTIONS = "TEXT NOT NULL";
-/*
-    //TABELA DLA DANYCH O UZYTKOWNIKU
-    public static final String KEY_SEX = "sex";
-    public static final String SEX_OPTIONS="TEXT NOT NULL";
-    public static final String KEY_AGE = "age";
-    public static final String AGE_OPTIONS="TEXT NOT NULL";
-    public static final String KEY_WEIGHT = "age";
-    public static final String WEIGHT_OPTIONS = "TEXT NOT NULL";
-    public static final String KEY_GOAL = "goal";
-    public static final String GOAL_OPTIONS = "TEXT NOT NULL";
-    public static final String KEY_HEIGHT = "height";
-    public static final String HEIGHT_OPTIONS = "TEXT NOT NULL";
-*/
+
+    //TABELA DLA AKTUALNEJ WAGI
+    public static final String KEY_WEIGHT = "weight";
+    public static final String WEIGHT_OPTIONS = "REAL";
+
     private static final String TAG = "DBAdapter";
 
     //Informacje o bazie danych i tabeli
@@ -62,7 +54,12 @@ public class DBAdapter {
     private static final String DATABASE_TABLE = "tblFood";
     private static final String DATABASE_TABLE_2 = "tblMeals";
     private static final String DATABASE_TABLE_3= "tblNotes";
+    private static final String DATABASE_TABLE_4 = "tblStats";
     private static final int DATABASE_VERSION = 1;
+
+
+
+
 
     //Tworzenie tabeli
     private static final String DATABASE_CREATE =
@@ -76,6 +73,10 @@ public class DBAdapter {
     private static final String DATABASE_CREATE3 =
             "CREATE TABLE " + DATABASE_TABLE_3 + " ( " + KEY_ROWID + " " + ID_OPTIONS + ", " + KEY_DATE + " " + DATE_OPTIONS
             + ", " + KEY_TITLE + " " + TITLE_OPTIONS + ", " + KEY_TEXT + " " + TEXT_OPTIONS + ");";
+
+    private static final String DATABASE_CREATE4 =
+            "CREATE TABLE " + DATABASE_TABLE_4 + " ( " + KEY_ROWID + " " + ID_OPTIONS + ", " + KEY_DATE + " " + DATE_OPTIONS
+                    + ", " + KEY_WEIGHT + " " + WEIGHT_OPTIONS +");";
 
     private final Context context;
     private DatabaseHelper DBHelper;
@@ -91,11 +92,35 @@ public class DBAdapter {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 
+        String sql1 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('banan', '24', '1', '0');";
+        String sql2 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('bułki kajzerki', '60', '8', '4');";
+        String sql3 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('chleb zwykły', '57', '5', '1');";
+        String sql4 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('indyk pierś','0', '20', '1');";
+        String sql5 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('jaja gotowane', '1', '10', '8');";
+        String sql6 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('kasza gryczana', '70', '13', '3');";
+        String sql7 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('kurczak pierś', '0', '22', '1');";
+        String sql8 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('makaron', '79', '10', '2');";
+        String sql9 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('makrela wędzona', '0', '20', '16');";
+        String sql10 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('mleko 2%', '5', '3', '2');";
+        String sql11 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('płatki owsiane', '70', '12', '7');";
+        String sql12 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('ryż biały', '80', '7', '2');";
+        String sql13 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('ser twarogowy chudy', '4', '20', '1');";
+        String sql14 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('serek wiejski light', '2', '11', '3');";
+        String sql15 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('ser twarogowy chudy', '4', '20', '1');";
+
+
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(DATABASE_CREATE);
             db.execSQL(DATABASE_CREATE2);
             db.execSQL(DATABASE_CREATE3);
+            db.execSQL(DATABASE_CREATE4);
+
+            String[] statements = new String[]{sql1,sql2,sql3,sql4,sql5,sql6,sql7,sql8,sql9,sql10,sql11,sql12,sql13,sql14,sql15,};
+
+            for(String sql : statements){
+                db.execSQL(sql);
+            }
         }
 
         @Override
@@ -107,6 +132,7 @@ public class DBAdapter {
             db.execSQL("DROP TABLE IF EXISTS tblFood");
             db.execSQL("DROP TABLE IF EXISTS tblMeals");
             db.execSQL("DROP TABLE IF EXISTS tblData");
+            db.execSQL("DTOP TABLE IF EXTSTS tblStats");
             onCreate(db);
         }
     }
@@ -121,6 +147,8 @@ public class DBAdapter {
     public void close() {
         DBHelper.close();
     }
+
+    //--------------Tabela FOOD------------------------------------------------------
 
     //Wprowadź nowe produkty
     public boolean insertFood(String food, String protein, String carb, String fat) {
@@ -182,8 +210,8 @@ public class DBAdapter {
 
         if(c.moveToFirst()){
             ProductClass productClass = new ProductClass(c.getString(c.getColumnIndex(KEY_FOOD)),
-                    c.getString(c.getColumnIndex(KEY_CARB)),c.getString(c.getColumnIndex(KEY_PROTEIN)),
-                    c.getString(c.getColumnIndex(KEY_FAT)));
+                    c.getString(c.getColumnIndex(KEY_PROTEIN)),c.getString(c.getColumnIndex(KEY_FAT)),
+                    c.getString(c.getColumnIndex(KEY_CARB)));
 
             if(c != null && !c.isClosed()) {
                 c.close();
@@ -213,6 +241,8 @@ public class DBAdapter {
             return false;
         }
     }
+
+    //----------------------------Tabela MEAL------------------------------------
 
     //WPROWADZ POSILEK
     public boolean insertMeal(String food, String date, String amount) {
@@ -253,8 +283,10 @@ public class DBAdapter {
     public boolean deleteMeal(int id) {
         return db.delete(DATABASE_TABLE_2, KEY_ROWID +"=?", new String[] {""+id}) > 0;
     }
-    //NOTATKI
-    //Dodaj nowe notatki
+
+    //-----------------------------Tabela NOTES---------------------------------------
+
+    //DODAJ NOWA NOTATKE
 
     public boolean insertNote(String date, String title, String text) {
 
@@ -266,6 +298,7 @@ public class DBAdapter {
             return db.insert(DATABASE_TABLE_3, null, initialValues) > 0;
         }
 
+    //POBIERZ NOTATKI
     public ArrayList<NoteClass> getNotes() {
         String query = "SELECT * FROM " + DATABASE_TABLE_3;
 
@@ -284,7 +317,36 @@ public class DBAdapter {
         }
         return list;
     }
+
+    //---------------------------------Tabela STATS----------------------------
+
+
+    public boolean insertStat(String date, float weight) {
+
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(KEY_DATE, date);
+        initialValues.put(KEY_WEIGHT, weight);
+        return db.insert(DATABASE_TABLE_4, null, initialValues) > 0;
     }
 
+    public ArrayList<StatClass> getStats() {
+        String query = "SELECT * FROM " + DATABASE_TABLE_4;
+
+        ArrayList<StatClass> list = new ArrayList<StatClass>();
+        Cursor c = db.rawQuery(query, new String[] {});
+
+        if(c.moveToFirst()) {
+            do {
+                StatClass statClass = new StatClass(c.getString(c.getColumnIndex(KEY_DATE)),
+                        c.getFloat(c.getColumnIndex(KEY_WEIGHT)), c.getInt(c.getColumnIndex(KEY_ROWID)));
+                list.add(statClass);
+            } while (c.moveToNext());
+        }
+        if(c != null && !c.isClosed()) {
+            c.close();
+        }
+        return list;
+    }
+}
 
 

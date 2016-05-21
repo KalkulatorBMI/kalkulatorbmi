@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.adrian.appfit">
-
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,16 +16,20 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".JedzenieActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".JedzenieSzukajActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".DodajPosilekActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".SplashScreen"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,8 +42,17 @@
         <activity
             android:name=".Podsumowanie"
             android:screenOrientation="portrait" />
-        <activity android:name=".test" />
-        <activity android:name=".DziennikActivity"></activity>
+        <activity android:name=".DziennikActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".StatActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".AddStatActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <receiver android:name="com.example.adrian.appfit.Reciever">
+
+        </receiver>
     </application>
 
 </manifest>
