@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -11,20 +12,34 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Random;
+
 public class SplashScreen extends AppCompatActivity {
+
     private static int SPLASH_TIME_OUT = 4000;
-    TextView textView;
+    DBAdapter db = new DBAdapter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        //WYSWIETLANIE LOSOWEGO CYTATU
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         imageView.startAnimation(myFadeInAnimation);
 
         TextView textView = (TextView) findViewById(R.id.textView3);
+        db.open();
+        Random random = new Random();
+        int id_rand;
+            id_rand = random.nextInt(db.getAmQuotes())+1;
+        QuoteClass quoteClass = db.getRandQuo(id_rand);
+        textView.setText(Html.fromHtml( "<i>       '" + quoteClass.getText() + "'<i>"
+                +"<br/>             <b>" + quoteClass.getTitle() +"<b>"));
+        db.close();
+
+
         Animation RightSwipe = AnimationUtils.loadAnimation(this, R.anim.slide);
         textView.startAnimation(RightSwipe);
 

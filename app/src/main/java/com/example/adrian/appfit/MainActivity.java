@@ -40,17 +40,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //USTALENIE ALARMU CO TYDZIEN
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 21);
-        calendar.set(Calendar.MINUTE, 5);
-        calendar.set(Calendar.SECOND, 0);
-        Intent intent1 = new Intent(MainActivity.this, Reciever.class);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY*7, pendingIntent);
     }
 
     public void goToFood(View view){
@@ -78,6 +68,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToStat(View view) {
         Intent intent = new Intent(this, StatActivity.class);
+        this.startActivity(intent);
+    }
+
+    public void goToTren(View view) {
+        Intent intent = new Intent(this, TreningActivity.class);
+        this.startActivity(intent);
+    }
+
+    public void goToUst(View view) {
+        Intent intent = new Intent(this, UstawieniaActivity.class);
         this.startActivity(intent);
     }
 }

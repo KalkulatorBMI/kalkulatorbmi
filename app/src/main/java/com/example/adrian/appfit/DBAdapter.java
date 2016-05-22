@@ -40,12 +40,17 @@ public class DBAdapter {
     //TABELA DLA NOTATEK
     public static final String KEY_TITLE = "title";
     public static final String TITLE_OPTIONS = "TEXT NOT NULL";
-    public static final String KEY_TEXT = "fat";
+    public static final String KEY_TEXT = "text";
     public static final String TEXT_OPTIONS = "TEXT NOT NULL";
 
     //TABELA DLA AKTUALNEJ WAGI
     public static final String KEY_WEIGHT = "weight";
     public static final String WEIGHT_OPTIONS = "REAL";
+
+    //TABELA DLA CWICZEN
+    public static final String KEY_IMGSRC = "imgsrc";
+    public static final String IMGSRC_OPTIONS = "TEXT NOT NULL";
+
 
     private static final String TAG = "DBAdapter";
 
@@ -55,11 +60,11 @@ public class DBAdapter {
     private static final String DATABASE_TABLE_2 = "tblMeals";
     private static final String DATABASE_TABLE_3= "tblNotes";
     private static final String DATABASE_TABLE_4 = "tblStats";
+    private static final String DATABASE_TABLE_5 = "tblExer";
+    private static final String DATABASE_TABLE_6 = "tblQuote";
+
+
     private static final int DATABASE_VERSION = 1;
-
-
-
-
 
     //Tworzenie tabeli
     private static final String DATABASE_CREATE =
@@ -77,6 +82,15 @@ public class DBAdapter {
     private static final String DATABASE_CREATE4 =
             "CREATE TABLE " + DATABASE_TABLE_4 + " ( " + KEY_ROWID + " " + ID_OPTIONS + ", " + KEY_DATE + " " + DATE_OPTIONS
                     + ", " + KEY_WEIGHT + " " + WEIGHT_OPTIONS +");";
+
+    private static final String DATABASE_CREATE5 =
+            "CREATE TABLE " + DATABASE_TABLE_5 + " ( " + KEY_ROWID + " " + ID_OPTIONS + ", " + KEY_IMGSRC + " " + IMGSRC_OPTIONS
+                    + ", " + KEY_TITLE + " " + TITLE_OPTIONS + ", " + KEY_TEXT + " " + TEXT_OPTIONS + ");";
+
+
+    private static final String DATABASE_CREATE6 =
+            "CREATE TABLE " + DATABASE_TABLE_6 + " ( " + KEY_ROWID + " " + ID_OPTIONS + ", " + KEY_TITLE + " " + TITLE_OPTIONS + ", " + KEY_TEXT + " " + TEXT_OPTIONS + ");";
+
 
     private final Context context;
     private DatabaseHelper DBHelper;
@@ -108,6 +122,17 @@ public class DBAdapter {
         String sql14 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('serek wiejski light', '2', '11', '3');";
         String sql15 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('ser twarogowy chudy', '4', '20', '1');";
 
+        String ex_sql1 = "INSERT INTO tblExer (title, text, imgsrc) VALUES ('Pompki', 'Należy ustawić ręce tak, aby przy wykonaniu pompki w stawie łokciowym był kąt prosty, czyli ręce powinny być ustawione szerzej niż stawy barkowe. Ilość: 3 serie po MAX powtórzeń.', 'pompki');";
+        String ex_sql2 = "INSERT INTO tblExer (title, text, imgsrc) VALUES ('Przysiady', 'Nogi rozstaw na szerokość barków, rozluźnij kolana a stopy ustaw równolegle do siebie. Ciało obniżaj aż do uzyskania kąta 90 stopni między udami a podudziami. Ilość: 4 serie po 20 powtórzeń.', 'squats');";
+        String ex_sql3 = "INSERT INTO tblExer (title, text, imgsrc) VALUES ('Brzuszki', 'Połóż się tyłem. Nogi ugięte w stawach kolanowych pod kątem ok. 90 stopni. Stopy uniesione w powietrzu. Dłonie trzymamy na potylicy lub skroniach. Ilość: 4 serie po 25 powtórzeń. Zwiększać co tydzień o 5.', 'crunch');";
+        String ex_sql4 = "INSERT INTO tblExer (title, text, imgsrc) VALUES ('Dipsy', 'Postaw równolegle dwa krzesła, w takiej odległości od siebie, abyś mógł na jednym oprzeć się piętami, a na drugim umieścić dłonie. Wykonaj między nimi pompkę, uginając przedramiona w łokciach. Ilość: 3 serie po MAX powtórzeń.', 'dips');";
+
+        String qu_sql1 = "INSERT INTO tblQuote (title, text) VALUES ('Michael Jordan', 'Mogę zaakceptować porażkę, ale nie mogę zaakceptować braku próby.')";
+        String qu_sql2 = "INSERT INTO tblQuote (title, text) VALUES ('Edward John Phelps', 'Człowiek, który nie robi błędów, zwykle nie robi niczego.')";
+        String qu_sql3 = "INSERT INTO tblQuote (title, text) VALUES ('Philip Wylie', 'Sukces to drabina, po której nie sposób wspiąć się z rękami w kieszeniach.')";
+        String qu_sql4 = "INSERT INTO tblQuote (title, text) VALUES ('Thomas Fowell Buxton', 'Dysponując zwykłymi talentami i niezwykłą wytrwałością możesz osiągnąć wszystko.')";
+        String qu_sql5 = "INSERT INTO tblQuote (title, text) VALUES ('Arystoteles', 'Nasze szczęście zależy od nas samych.')";
+
 
         @Override
         public void onCreate(SQLiteDatabase db) {
@@ -115,10 +140,27 @@ public class DBAdapter {
             db.execSQL(DATABASE_CREATE2);
             db.execSQL(DATABASE_CREATE3);
             db.execSQL(DATABASE_CREATE4);
+            db.execSQL(DATABASE_CREATE5);
+            db.execSQL(DATABASE_CREATE6);
 
+            //UZUPELNIANIE TABELI PRODUKTOW
             String[] statements = new String[]{sql1,sql2,sql3,sql4,sql5,sql6,sql7,sql8,sql9,sql10,sql11,sql12,sql13,sql14,sql15,};
 
             for(String sql : statements){
+                db.execSQL(sql);
+            }
+
+            //UZUPELNIANIE TABELI CWICZEN
+            String [] statements2 = new String []{ex_sql1, ex_sql2, ex_sql3, ex_sql4};
+
+            for(String sql: statements2) {
+                db.execSQL(sql);
+            }
+
+            //UZUPELNIANIE TABELI CYTATOW
+            String[] statements3 = new String []{qu_sql1,qu_sql2,qu_sql3,qu_sql4,qu_sql5};
+
+            for(String sql:statements3) {
                 db.execSQL(sql);
             }
         }
@@ -132,7 +174,9 @@ public class DBAdapter {
             db.execSQL("DROP TABLE IF EXISTS tblFood");
             db.execSQL("DROP TABLE IF EXISTS tblMeals");
             db.execSQL("DROP TABLE IF EXISTS tblData");
-            db.execSQL("DTOP TABLE IF EXTSTS tblStats");
+            db.execSQL("DTOP TABLE IF EXISTS tblStats");
+            db.execSQL("DROP TABLE IF EXISTS tblExer");
+            db.execSQL("DROP TABLE IF EXISTS tblQuote");
             onCreate(db);
         }
     }
@@ -168,15 +212,6 @@ public class DBAdapter {
 
     public boolean deleteFood(String food) {
             return db.delete(DATABASE_TABLE, KEY_FOOD +"=?", new String[] {food}) > 0;
-    }
-
-    public int getAllEntries() {
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(food) FROM tblFood", null);
-        if (cursor.moveToFirst()) {
-            return cursor.getInt(0);
-        }
-        return cursor.getInt(0);
     }
 
     //ZWROC PRODUKTY Z PODANA CZESCIOWA NAZWA
@@ -347,6 +382,86 @@ public class DBAdapter {
         }
         return list;
     }
+
+    //TABELA Z CWICZENIAMI, POBIERANIE CWICZEN
+
+    public ArrayList<ExercClass> getExer() {
+        String query = "SELECT * FROM " + DATABASE_TABLE_5;
+
+        ArrayList<ExercClass> list = new ArrayList<ExercClass>();
+        Cursor c = db.rawQuery(query, new String[] {});
+
+        if(c.moveToFirst()) {
+            do {
+                ExercClass exerClass = new ExercClass(c.getString(c.getColumnIndex(KEY_IMGSRC)),
+                        c.getString(c.getColumnIndex(KEY_TITLE)),c.getString(c.getColumnIndex(KEY_TEXT)), c.getInt(c.getColumnIndex(KEY_ROWID)));
+                list.add(exerClass);
+            } while (c.moveToNext());
+        }
+        if(c != null && !c.isClosed()) {
+            c.close();
+        }
+        return list;
+    }
+
+
+    //Znajdź produkt
+    public ExercClass getSinExerc(String arg) {
+        String query = "SELECT * FROM " + DATABASE_TABLE_5 + " WHERE title =?";
+
+        Cursor c = db.rawQuery(query, new String[] {arg});
+
+        if(c.moveToFirst()){
+            ExercClass exerClass = new ExercClass(c.getString(c.getColumnIndex(KEY_IMGSRC)),
+                    c.getString(c.getColumnIndex(KEY_TITLE)),c.getString(c.getColumnIndex(KEY_TEXT)), c.getInt(c.getColumnIndex(KEY_ROWID)));
+            if(c != null && !c.isClosed()) {
+                c.close();
+            }
+
+            return exerClass;
+        }
+        else {
+            if(c != null && !c.isClosed()) {
+                c.close();
+            }
+            return null;
+        }
+    }
+
+    //--------------------------------------------Tabela NOTATKI --------------------------------------
+
+    public int getAmQuotes() {
+        Cursor cursor = db.rawQuery(
+                "SELECT COUNT(_id) FROM tblQuote", null);
+        if (cursor.moveToFirst()) {
+            return cursor.getInt(0);
+        }
+        return cursor.getInt(0);
+    }
+
+    public QuoteClass getRandQuo(int id) {
+        String query = "SELECT * FROM " + DATABASE_TABLE_6 + " WHERE _id =?";
+        Cursor c = db.rawQuery(query, new String[] {id+""});
+
+        if(c.moveToFirst()){
+            QuoteClass quoteClass = new QuoteClass(c.getString(c.getColumnIndex(KEY_TITLE)),
+                    c.getString(c.getColumnIndex(KEY_TEXT)),c.getInt(c.getColumnIndex(KEY_ROWID))
+                    );
+
+            if(c != null && !c.isClosed()) {
+                c.close();
+            }
+
+            return quoteClass;
+        }
+        else {
+            if(c != null && !c.isClosed()) {
+                c.close();
+            }
+            return null;
+        }
+    }
+
 }
 
 

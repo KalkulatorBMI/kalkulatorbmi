@@ -27,7 +27,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="220dp"
-        android:text="- Sprawdź swoje posiłki &#10; - Usuń posiłki &#10; - Sprawdź swoje zapotrzebowanie"
+        android:text="- Sprawdź swoje posiłki &#10; - Sprawdź swoje zapotrzebowanie"
         android:textAllCaps="false"
         android:onClick="goToDodajPosilek"
         android:id="@+id/button"

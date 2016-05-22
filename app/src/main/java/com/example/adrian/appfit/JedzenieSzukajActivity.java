@@ -26,6 +26,7 @@ package com.example.adrian.appfit;
         import java.util.List;
 
 public class JedzenieSzukajActivity extends AppCompatActivity {
+
     DBAdapter db = new DBAdapter(this);
     EditText txtFood;
     EditText txtProtein;

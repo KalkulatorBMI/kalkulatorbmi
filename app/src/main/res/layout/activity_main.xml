@@ -33,6 +33,7 @@
     <Button
         android:layout_width="135dp"
         android:layout_height="135dp"
+        android:onClick="goToUst"
         android:id="@+id/ustawieniaButton"
         android:background="@drawable/ustawienia"
         android:layout_alignParentBottom="true"
@@ -42,6 +43,7 @@
         android:layout_width="135dp"
         android:layout_height="135dp"
         android:id="@+id/aktywnoscButton"
+        android:onClick="goToTren"
         android:background="@drawable/aktywnosc"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />

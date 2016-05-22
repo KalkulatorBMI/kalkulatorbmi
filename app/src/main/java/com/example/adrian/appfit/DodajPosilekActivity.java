@@ -63,12 +63,14 @@ public class DodajPosilekActivity extends AppCompatActivity {
             calories = 0;
             for (int i = 0; i < sizeOfArray; i++) {
                 MealClass mealClass = db.getMeals(_clockDateFormat.format(c.getTime()).toString()).get(i);
+                /*
                 calories += (double)Integer.valueOf(mealClass.getAmount())/100.0  *((double) Integer.valueOf(db.getEntry(mealClass.getName()).getFat())
                         * 9.0 + (double) Integer.valueOf(db.getEntry(mealClass.getName()).getCarbo()) * 4.0 + (double) Integer.valueOf(db.getEntry(mealClass.getName()).getProtein())
                         *4.0);
-                protein += Integer.valueOf(db.getEntry(mealClass.getName()).getProtein());
-                carb += Integer.valueOf(db.getEntry(mealClass.getName()).getCarbo());
-                fat +=  protein += Integer.valueOf(db.getEntry(mealClass.getName()).getFat());
+                */
+                protein += (double) Integer.valueOf(db.getEntry(mealClass.getName()).getProtein()) * ((double)Integer.valueOf(mealClass.getAmount())/100.0);
+                carb += Integer.valueOf(db.getEntry(mealClass.getName()).getCarbo())* ((double)Integer.valueOf(mealClass.getAmount())/100.0);
+                fat += Integer.valueOf(db.getEntry(mealClass.getName()).getFat())* ((double)Integer.valueOf(mealClass.getAmount())/100.0);
             }
 
             howTextView.setText("Co dziś jadłeś?");
@@ -119,8 +121,7 @@ public class DodajPosilekActivity extends AppCompatActivity {
 
             db.close();
 
-
-
+            /*
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -141,8 +142,9 @@ public class DodajPosilekActivity extends AppCompatActivity {
                     });
                     alert.show();
                 }
-             });
 
+             });
+                */
 
 
         }
