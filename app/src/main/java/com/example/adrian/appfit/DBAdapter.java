@@ -121,6 +121,41 @@ public class DBAdapter {
         String sql13 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('ser twarogowy chudy', '4', '20', '1');";
         String sql14 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('serek wiejski light', '2', '11', '3');";
         String sql15 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('ser twarogowy chudy', '4', '20', '1');";
+        String sql16 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('śmietana 12%', '4', '3', '12');";
+        String sql17 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('śmietana 18%', '4', '3', '18');";
+        String sql18 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('śmietana 30%', '3', '2', '30');";
+        String sql19 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('mąka orkiszowa', '59', '15', '2');";
+        String sql20 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('mąka gryczana', '71', '12', '3');";
+        String sql21 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('mąka pszenna graham', '71', '11', '2');";
+        String sql22 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('mąka tortowa', '71', '10', '1');";
+        String sql23 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('skrobia ziemniaczana', '84', '1', '1');";
+        String sql24 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('jajecznica', '1', '10', '9');";
+        String sql25 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('jajko przepiórcze', '1', '13', '11');";
+        String sql26 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('jajko sadzone', '1', '10', '14');";
+        String sql27 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('jajko kurze gotowane', '1', '13', '10');";
+        String sql28 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('masło osełkowe', '0', '0', '82');";
+        String sql29 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('masło śmietankowe', '1', '1', '74');";
+        String sql30 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('margaryna Benecol', '0', '0', '60');";
+        String sql31 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('olej rzepakowy', '0', '0', '100');";
+        String sql32 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('oliwa z oliwek', '1', '0', '100');";
+        String sql33 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('kurczak gotowany w jarzynach', '5', '8', '6');";
+        String sql34 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('smażona pierś z kurczaka', '0', '30', '4');";
+        String sql35 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('duszona pierś z kurczaka', '0', '27', '3');";
+        String sql36 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('wątróbka z kurczaka', '1', '25', '9');";
+        String sql37 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('kabanosy drobiowe', '0', '25', '45');";
+        String sql38 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('bukiet surówek', '9', '2', '6');";
+        String sql39 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('mizeria', '7', '2', '5');";
+        String sql40 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('omlet ze szpinakiem', '6', '7', '17');";
+        String sql41 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('placki z cukinii i szpinaku', '29', '32', '40');";
+        String sql42 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('łosoś', '0', '20', '14');";
+        String sql43 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('tuńczyk', '0', '24', '5');";
+        String sql44 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('panga', '0', '13', '4');";
+        String sql45 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('makrela wędzona', '0', '21', '15');";
+        String sql46 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('dorsz', '0', '17', '1');";
+        String sql47 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('szynka z piersi kurczaka', '1', '21', '1');";
+        String sql48 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('szynka z indyka', '0', '17', '2');";
+        String sql49 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('kiełbasa krakowska sucha', '4', '23', '3');";
+        String sql50 = "INSERT INTO tblFood (food, carb, protein, fat) VALUES ('kabanosy wieprzowe', '0', '27', '24');";
 
         String ex_sql1 = "INSERT INTO tblExer (title, text, imgsrc) VALUES ('Pompki', 'Należy ustawić ręce tak, aby przy wykonaniu pompki w stawie łokciowym był kąt prosty, czyli ręce powinny być ustawione szerzej niż stawy barkowe. Ilość: 3 serie po MAX powtórzeń.', 'pompki');";
         String ex_sql2 = "INSERT INTO tblExer (title, text, imgsrc) VALUES ('Przysiady', 'Nogi rozstaw na szerokość barków, rozluźnij kolana a stopy ustaw równolegle do siebie. Ciało obniżaj aż do uzyskania kąta 90 stopni między udami a podudziami. Ilość: 4 serie po 20 powtórzeń.', 'squats');";
@@ -144,7 +179,10 @@ public class DBAdapter {
             db.execSQL(DATABASE_CREATE6);
 
             //UZUPELNIANIE TABELI PRODUKTOW
-            String[] statements = new String[]{sql1,sql2,sql3,sql4,sql5,sql6,sql7,sql8,sql9,sql10,sql11,sql12,sql13,sql14,sql15,};
+            String[] statements = new String[]{sql1,sql2,sql3,sql4,sql5,sql6,sql7,sql8,sql9,sql10,sql11,sql12,sql13,
+                    sql14,sql15,sql16,sql17,sql18,sql19,sql20,sql21,sql22,sql23,sql24,sql25,sql26,sql27,sql28,sql29
+                    ,sql30,sql31,sql32,sql33,sql34,sql35,sql36,sql37,sql38,sql39,sql40,sql41,sql42,sql43,sql44,sql45,
+                    sql46,sql47,sql48,sql49,sql50};
 
             for(String sql : statements){
                 db.execSQL(sql);

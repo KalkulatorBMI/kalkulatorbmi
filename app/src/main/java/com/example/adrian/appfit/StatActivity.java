@@ -22,7 +22,6 @@ import java.util.Calendar;
 import java.util.List;
 
 public class StatActivity extends AppCompatActivity {
-
     DBAdapter db = new DBAdapter(this);
 
     @Override
@@ -36,11 +35,11 @@ public class StatActivity extends AppCompatActivity {
 
         //TWORZENIE WYKRESU KOLOWEGO
         LineChart lineChart = (LineChart) findViewById(R.id.chart);
-        // creating data values
         ArrayList<Entry> entries = new ArrayList<>();
         int i=0;
 
         db.open();
+        //TWORZENIE WARTOSCI
         List<StatClass> stats = db.getStats();
         for(StatClass stat : stats) {
             entries.add(new Entry(stat.getWeight(), i++));
@@ -48,7 +47,7 @@ public class StatActivity extends AppCompatActivity {
 
         LineDataSet dataset = new LineDataSet(entries, "");
 
-        // creating labels
+        //TWORZENIE ETYKIET
         ArrayList<String> labels = new ArrayList<String>();
         i = 0;
         for(StatClass stat : stats) {
@@ -63,5 +62,4 @@ public class StatActivity extends AppCompatActivity {
         dataset.setDrawCubic(true);
         lineChart.setDescription("Twoja waga");
     }
-
 }

@@ -82,4 +82,16 @@
         android:onClick="goToPlanDzialania"
         android:layout_alignParentBottom="true"
         android:layout_alignEnd="@+id/infobmi" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:id="@+id/textView28"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

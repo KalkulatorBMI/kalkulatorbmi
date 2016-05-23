@@ -26,11 +26,6 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
-    private int REQUEST_CODE = 0;
-    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -46,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public void goToFood(View view){
         SharedPreferences shared = getSharedPreferences("PREFS", MODE_PRIVATE);
 
+        //SPRAWDZENIE CZY BMI I PLAN DZIALANIA ZOSTALY OKRESLONE
         if(shared.getBoolean("flagFood", false) == false) {
             Toast toast = Toast.makeText(getApplicationContext(), "Najpierw określ swoje bmi oraz dalszy plan działania. Kliknij w ikonkę pod spodem.", Toast.LENGTH_SHORT);
             toast.show();

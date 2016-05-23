@@ -3,6 +3,8 @@ package com.example.adrian.appfit;
 /**
  * Created by Adrian on 21.05.2016.
  */
+
+//KLASA ZAWIERAJACA INFORMACJE O STATYSTYKACH
 public class StatClass {
     private String data;
     private int id;

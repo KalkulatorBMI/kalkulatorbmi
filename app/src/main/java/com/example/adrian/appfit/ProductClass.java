@@ -3,6 +3,8 @@ package com.example.adrian.appfit;
 /**
  * Created by Adrian on 07.04.2016.
  */
+
+//KLASA ZAWIERAJACA DANE O PRODUKTACH
 public class ProductClass {
 
     private String name;

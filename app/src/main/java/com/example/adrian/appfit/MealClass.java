@@ -3,6 +3,7 @@ package com.example.adrian.appfit;
 /**
  * Created by Adrian on 09.04.2016.
  */
+//KLASA ZAWIERAJACA DANE O POSILKACH
 public class MealClass {
     private String date;
     private String name;

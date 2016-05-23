@@ -26,10 +26,9 @@ public class UstawieniaActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
     }
 
+    //USTAWIENIE POWIADOMIEN
     public void aktCzas(View view){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
@@ -67,10 +66,10 @@ public class UstawieniaActivity extends AppCompatActivity {
                         interval = 4;
                 }
 
-                //USTALENIE ALARMU CO TYDZIEN
+                //USTALENIE ALARMU CO TYDZIEN, 2 TYGODNIE LUB MIESIAC ZGODNIE ZE ZMIENNA INTERVAL
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(System.currentTimeMillis());
-                calendar.set(Calendar.HOUR_OF_DAY, 20);
+                calendar.set(Calendar.HOUR_OF_DAY, 18);
                 calendar.set(Calendar.MINUTE, 0);
                 calendar.set(Calendar.SECOND, 0);
                 Intent intent1 = new Intent(UstawieniaActivity.this, Reciever.class);
@@ -84,25 +83,21 @@ public class UstawieniaActivity extends AppCompatActivity {
         alert.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //NIE ROBISZ NIC
-
             }
         });
         alert.show();
     }
 
+    //WYSWIETL POWIADOMIENIE O AUTORACH
     public void oAut(View view){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
         alert.setTitle("Autorzy: ");
         alert.setMessage("Adrian Jankowski \nSylwester Kalinowski \nMateusz Wielgosz \nSylwia Rusinek \n\n                grupa: E3C2S1 \n                projekt PUMO 2016");
-
-
         alert.setPositiveButton("Wróć", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
              //NIE ROBISZ NIC
             }
         });
-
         alert.show();
     }
 }

@@ -76,9 +76,9 @@ public class Podsumowanie extends AppCompatActivity {
 
         if(aktywTv.getText().equals("duża"))
             tea = (60f * 8f * 3f) / 7f; //TRZY TRENINGI PO 60 MINUT W CIAGU TYGODNIA
-        else if(aktywTv.getText().equals("średnia"))
+        else if(aktywTv.getText().equals("średnia"))  //DWA TRENINGI PO 30-45 MIN W CIAGU TYGODNIA
             tea = (40f * 8f * 3f) / 7f;
-        else
+        else                                   //JEDEN TRENING  W CIAGU TYGODNIA, LUB BRAK TRENINGU
             tea = (20f * 8f * 3f) / 7f;
 
         tdee = bmr + neat + tea;
@@ -117,12 +117,10 @@ public class Podsumowanie extends AppCompatActivity {
 
         PieDataSet dataset = new PieDataSet(entries, "");
 
-        // creating labels
         ArrayList<String> labels = new ArrayList<String>();
         labels.add("g. Białko");
         labels.add("g. Tłuszcze");
         labels.add("g. Węgle");
-
 
         PieData data = new PieData(labels, dataset); // initialize Piedata
         pieChart.setData(data);

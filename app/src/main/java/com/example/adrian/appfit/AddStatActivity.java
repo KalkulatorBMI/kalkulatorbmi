@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class AddStatActivity extends AppCompatActivity {
-
     DBAdapter db = new DBAdapter(this);
     EditText mEditText;
     Button mButton;
@@ -26,6 +25,7 @@ public class AddStatActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
+    //ZAKTUALIZUJ SWOJA OBECNA WAGE
     public void aktWaga(View view){
         float waga;
         String w;

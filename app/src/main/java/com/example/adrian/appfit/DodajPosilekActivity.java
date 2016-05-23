@@ -28,7 +28,7 @@ public class DodajPosilekActivity extends AppCompatActivity {
     TextView howTextView;
     int sizeOfArray;
     double calories = 0.0;
-    double protein = 0.0; //ILE ZJEDLISMY W DANYM DNIU G DANEGO MAKROSKLADNIKA
+    double protein = 0.0;
     double carb = 0.0;
     double fat = 0.0;
 
@@ -45,7 +45,7 @@ public class DodajPosilekActivity extends AppCompatActivity {
         SimpleDateFormat _clockDateFormat = new SimpleDateFormat("dd.MM.yy");
 
         howTextView = (TextView) findViewById(R.id.textView2);
-        //AKTUALIZACJA NA STARCIE, POBRANIE WSZYSTKICH POSILKOW LICZENIE KALORII
+        //AKTUALIZACJA NA STARCIE, POBRANIE WSZYSTKICH POSILKOW LICZENIE GRAMOW POSZCZEGOLNYCH MAKROSKLADNIKOW
         db.open();
         sizeOfArray = db.getMeals(_clockDateFormat.format(c.getTime()).toString()).size();
 
@@ -63,11 +63,6 @@ public class DodajPosilekActivity extends AppCompatActivity {
             calories = 0;
             for (int i = 0; i < sizeOfArray; i++) {
                 MealClass mealClass = db.getMeals(_clockDateFormat.format(c.getTime()).toString()).get(i);
-                /*
-                calories += (double)Integer.valueOf(mealClass.getAmount())/100.0  *((double) Integer.valueOf(db.getEntry(mealClass.getName()).getFat())
-                        * 9.0 + (double) Integer.valueOf(db.getEntry(mealClass.getName()).getCarbo()) * 4.0 + (double) Integer.valueOf(db.getEntry(mealClass.getName()).getProtein())
-                        *4.0);
-                */
                 protein += (double) Integer.valueOf(db.getEntry(mealClass.getName()).getProtein()) * ((double)Integer.valueOf(mealClass.getAmount())/100.0);
                 carb += Integer.valueOf(db.getEntry(mealClass.getName()).getCarbo())* ((double)Integer.valueOf(mealClass.getAmount())/100.0);
                 fat += Integer.valueOf(db.getEntry(mealClass.getName()).getFat())* ((double)Integer.valueOf(mealClass.getAmount())/100.0);
@@ -111,7 +106,6 @@ public class DodajPosilekActivity extends AppCompatActivity {
             final ArrayAdapter<String> adapter = new ArrayAdapter<String>(DodajPosilekActivity.this, android.R.layout.simple_list_item_1, LISTA_POSILKI);
 
             List<MealClass> meals = db.getMeals(_clockDateFormat.format(c.getTime()).toString());
-
             for(MealClass meal : meals) {
                 LISTA_POSILKI.add(meal.getName() + " " + meal.getAmount() + "g.");
             }
@@ -120,33 +114,6 @@ public class DodajPosilekActivity extends AppCompatActivity {
             listView.setAdapter(adapter);
 
             db.close();
-
-            /*
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    AlertDialog.Builder alert = new AlertDialog.Builder(DodajPosilekActivity.this);
-                    alert.setTitle("Chcesz usunąć posiłek?");
-
-                    alert.setPositiveButton("Tak", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-
-
-                        }
-                    });
-                    alert.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            //NIE ROBISZ NIC
-
-                        }
-                    });
-                    alert.show();
-                }
-
-             });
-                */
-
-
         }
     }
 

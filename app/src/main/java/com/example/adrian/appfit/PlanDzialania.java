@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.InputType;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,7 +18,6 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class PlanDzialania extends AppCompatActivity {
-
     String gender = "";
     Integer wiek = 0;
     String typB = "";
@@ -88,7 +88,7 @@ public class PlanDzialania extends AppCompatActivity {
                 SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
                 editor.putString("plec", gender);
                 editor.commit();
-               // if(gender.length()!=0 && wiek != 0 && wiek != 0 && typB.length()!=0 && aktyw.length()!=0 && cel.length()!=0)
+
                 //SPRAWDZENIE CZY MOZNA WYSWIETLIC
                 if(gender.length()!=0 && wiek != 0 && typB.length()!=0 && aktyw.length()!=0 && cel.length()!=0){
                     nextButton = (Button) findViewById(R.id.button12);
@@ -100,7 +100,6 @@ public class PlanDzialania extends AppCompatActivity {
         alert.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //NIE ROBISZ NIC
-
             }
         });
         alert.show();
@@ -124,12 +123,15 @@ public class PlanDzialania extends AppCompatActivity {
                     editor.putInt("wiek", wiek);
                     editor.commit();
 
-                    imageView2.setVisibility(View.VISIBLE); //CHECKED
+                    if(wiek==0)
+                        Toast.makeText(getApplicationContext(), "Źle podany wiek.", Toast.LENGTH_SHORT).show();
+                    else
+                        imageView2.setVisibility(View.VISIBLE); //CHECKED
                 } catch (NumberFormatException e) {
                     //INT MA NIEPRAWIDLOWA WARTOSC
                 }
                 //SPRAWDZENIE CZY MOZNA WYSWIETLIC
-                if(gender.length()!=0 && wiek != 0 && wiek != 0 && typB.length()!=0 && aktyw.length()!=0 && cel.length()!=0){
+                if(gender.length()!=0 && wiek != 0 && typB.length()!=0 && aktyw.length()!=0 && cel.length()!=0){
                     nextButton = (Button) findViewById(R.id.button12);
                     nextButton.setVisibility(View.VISIBLE);
                 }
@@ -150,6 +152,9 @@ public class PlanDzialania extends AppCompatActivity {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
         alert.setTitle("Wybierz typ budowy:");
+        alert.setMessage(Html.fromHtml("<b>Ektomorfik</b> - drobna budowa, mały obwód kości, szybki metabolizm. <br/>" +
+                "<b>Mezomorfik</b> - solidna budowa, duża ilość mięśni, mała ilość tkanki tłuszczowej. <br/>" +
+                "<b>Endomorfik</b> - masywna budowa ciała, grube kości, tendencja do tycia."));
 
         final RadioButton ectoButton, mesoButton, endoButton;
         final RadioGroup typBudowy = new RadioGroup(this);
@@ -188,8 +193,6 @@ public class PlanDzialania extends AppCompatActivity {
                 editor.putString("typBudowy", typB);
                 editor.commit();
 
-
-
                 //SPRAWDZENIE CZY MOZNA WYSWIETLIC
                 if(gender.length()!=0 && wiek != 0 && typB.length()!=0 && aktyw.length()!=0 && cel.length()!=0){
                     nextButton = (Button) findViewById(R.id.button12);
@@ -212,6 +215,9 @@ public class PlanDzialania extends AppCompatActivity {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
         alert.setTitle("Wybierz intensywność aktywności:");
+        alert.setMessage(Html.fromHtml("<b>Mała aktywność</b> - brak treningów w ciągu tygodnia.<br/> " +
+                "<b>Średnia aktywność</b> - 2 treningi 30 lub 45 minutowe w ciągu tygodnia. <br/>" +
+                "<b>Duża aktywność</b> - przynajmniej 3 treningi 60 minutowe w ciągu tygodnia. <br/>"));
 
         final RadioButton mButton, sButton, dButton;
         final RadioGroup aktywnosc = new RadioGroup(this);
@@ -261,7 +267,6 @@ public class PlanDzialania extends AppCompatActivity {
         alert.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //NIE ROBISZ NIC
-
             }
         });
         alert.show();
@@ -322,7 +327,6 @@ public class PlanDzialania extends AppCompatActivity {
         alert.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //NIE ROBISZ NIC
-
             }
         });
         alert.show();

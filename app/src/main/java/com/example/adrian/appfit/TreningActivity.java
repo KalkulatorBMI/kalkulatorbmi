@@ -41,6 +41,7 @@ public class TreningActivity extends AppCompatActivity {
         db.close();
         ListView listView = (ListView) findViewById(R.id.listView4);
 
+        //WYSWIETLANIE CWICZEN PO KLIKNIECIU NA POZYCJE Z LISTVIEW
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -66,7 +67,5 @@ public class TreningActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         db.close();
-
-
     }
 }

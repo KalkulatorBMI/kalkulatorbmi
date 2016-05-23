@@ -14,14 +14,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class KalkulatorActivity extends AppCompatActivity {
+import org.w3c.dom.Text;
 
+public class KalkulatorActivity extends AppCompatActivity {
     double bmi;
     double waga;
     double wzrost;
-
     Button button1;
     Button button2;
+    TextView txtView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,15 @@ public class KalkulatorActivity extends AppCompatActivity {
 
         button1 = (Button) findViewById(R.id.button5);
         button2 = (Button) findViewById(R.id.button6);
+        txtView = (TextView) findViewById(R.id.textView28);
 
+        SharedPreferences shared = getSharedPreferences("PREFS", MODE_PRIVATE);
+
+        //SPRAWDZENIE CZY BMI I PLAN DZIALANIA ZOSTALY OKRESLONE
+        if(shared.getBoolean("flagFood", false) == true) {
+            txtView.setText("Twoje BMI oraz plan działania są już ustalone. Jeśli chcesz uaktualnić dane," +
+                    " jeszcze raz przejdź przez ten proces.");
+        }
     }
 
     public void podajWage(View view){
@@ -68,7 +77,6 @@ public class KalkulatorActivity extends AppCompatActivity {
 
             }
         });
-
         alert.show();
     }
 

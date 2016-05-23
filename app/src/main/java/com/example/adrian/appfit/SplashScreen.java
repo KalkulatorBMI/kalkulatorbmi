@@ -15,7 +15,6 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class SplashScreen extends AppCompatActivity {
-
     private static int SPLASH_TIME_OUT = 4000;
     DBAdapter db = new DBAdapter(this);
 
@@ -23,31 +22,31 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //WYSWIETLANIE LOSOWEGO CYTATU
+        //WYSWIETLANIE LOGA I JEGO ANIMACJA
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         imageView.startAnimation(myFadeInAnimation);
 
+        //WYSWIETLANIE LOSOWEGO CYTATU
         TextView textView = (TextView) findViewById(R.id.textView3);
         db.open();
         Random random = new Random();
         int id_rand;
-            id_rand = random.nextInt(db.getAmQuotes())+1;
+        id_rand = random.nextInt(db.getAmQuotes())+1;
         QuoteClass quoteClass = db.getRandQuo(id_rand);
         textView.setText(Html.fromHtml( "<i>       '" + quoteClass.getText() + "'<i>"
                 +"<br/>             <b>" + quoteClass.getTitle() +"<b>"));
         db.close();
 
-
+        //ANIMACJA NAPISU
         Animation RightSwipe = AnimationUtils.loadAnimation(this, R.anim.slide);
         textView.startAnimation(RightSwipe);
 
-        //UKRYWAMY TITLE BAR I PASEK NAWIGACJI
-        getSupportActionBar().hide();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        //WPROWADZENIE OPOZNIENIA
         new Handler().postDelayed(new Runnable() {
 
             /*

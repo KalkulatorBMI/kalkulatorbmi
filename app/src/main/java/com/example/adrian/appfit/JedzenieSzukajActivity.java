@@ -26,7 +26,6 @@ package com.example.adrian.appfit;
         import java.util.List;
 
 public class JedzenieSzukajActivity extends AppCompatActivity {
-
     DBAdapter db = new DBAdapter(this);
     EditText txtFood;
     EditText txtProtein;
@@ -37,7 +36,6 @@ public class JedzenieSzukajActivity extends AppCompatActivity {
     Button addButton;
     String nazwa;
 
-    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -52,11 +50,8 @@ public class JedzenieSzukajActivity extends AppCompatActivity {
 
         searchButton.setOnClickListener(mAddListener);
         addButton.setOnClickListener(mAddListener);
-
-
     }
 
-    // Create an anonymous implementation of OnClickListener
     private OnClickListener mAddListener = new OnClickListener()
     {
 
@@ -110,10 +105,9 @@ public class JedzenieSzukajActivity extends AppCompatActivity {
                     break;
 
                 case R.id.searchFor:
-
-                    //WYSWIETLANIE DANE LISTY PRODUKTOW
+                    //WYSWIETLANIE ODPOWIEDNIEJ LISTY PRODUKTOW
                     final ArrayList<String> LISTA_PRODUKTY = new ArrayList<>();
-                   final ArrayAdapter<String> adapter = new ArrayAdapter<String>(JedzenieSzukajActivity.this, android.R.layout.simple_list_item_1, LISTA_PRODUKTY);
+                    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(JedzenieSzukajActivity.this, android.R.layout.simple_list_item_1, LISTA_PRODUKTY);
 
                     db.open();
                     try
@@ -123,7 +117,6 @@ public class JedzenieSzukajActivity extends AppCompatActivity {
                         for(ProductClass prod : products) {
                             LISTA_PRODUKTY.add(prod.getName());
                         }
-
                     }
                     catch (Exception ex)
                     {

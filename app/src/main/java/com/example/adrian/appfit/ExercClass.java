@@ -3,6 +3,8 @@ package com.example.adrian.appfit;
 /**
  * Created by Adrian on 22.05.2016.
  */
+
+//KLASA ZAWIERAJACA INFORMACJE O CWICZENIACH
 public class ExercClass {
     private String imgsrc;
     private String title;
